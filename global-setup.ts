@@ -10,7 +10,10 @@ export default async function globalSetup() {
     await page.locator('input[name="username"]').fill('admin');
     await page.locator('input[name="username"]').press('Tab');
     await page.locator('input[name="password"]').fill('admin');  
-    await page.locator('input:has-text("Sign In")').click();
+    
+    await page.click('text=Sign In'); //Added to reproduce the failure
+    // await page.locator('input:has-text("Sign In")').click();
+    
     // check we're actually signed in
     await expect(page.locator('text=Tokens')).toBeVisible();
     await context.storageState({ path: './storage.json' });
